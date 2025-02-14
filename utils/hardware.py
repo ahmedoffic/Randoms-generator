@@ -33,6 +33,11 @@ class Mouse:
     def location(self):x,y=pyautogui.position();return x*y
     def mouseClick(self):pyautogui.click(200,800)
 class TestRandom:
-    def batteryConnection(self):return Battery().percent()*Internet().port()
+    def batteryConnection(self):
+        eq = Battery().percent()*Internet().port()
+        try:
+            return eq 
+        except:
+            return 0
 if __name__ == "__main__":
     print("BC",TestRandom().batteryConnection())

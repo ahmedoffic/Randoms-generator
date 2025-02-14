@@ -1,7 +1,7 @@
 from . import hardware
 
 class Simple:
-    def __init__(self,GEN=True,Range=1):
+    def __init__(self,GEN=True,Range=100):
         self.GEN = GEN
         self.Range = Range
         if self.GEN:self.value = self.Generate()
@@ -14,7 +14,9 @@ class Simple:
         self.ram_used = hardware.Ram().used()
         self.internet = hardware.Internet().port()
         self.eq = (self.cpu_syscalls * self.diskIo % self.ram_used)/(self.internet)
-        return hardware.TestRandom().batteryConnection()
+        test1 = hardware.TestRandom().batteryConnection()
+        # return hardware.TestRandom().batteryConnection()
+        return int(round(self.eq * hardware.TestRandom().batteryConnection(), 3))
 
 if __name__ == "__main__":
     print(Simple().Generate())
